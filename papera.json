@@ -1,0 +1,602 @@
+[
+  {
+    "q": "1. In which of the following range does only one prime number lie?",
+    "opts": [
+      "(a) 40 and 50",
+      "(b) 60 and 70",
+      "(c) 80 and 90",
+      "(d) 90 and 100"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "2. What is the quotient when 76076 is divided by 13?",
+    "opts": [
+      "(a) 5652",
+      "(b) 5852",
+      "(c) 5762",
+      "(d) 5662"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "3. Which one is the smallest number among the following?",
+    "opts": [
+      "(a) 7413",
+      "(b) 7130",
+      "(c) 7985",
+      "(d) 7545"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "4. The difference between the smallest six-digit number and the largest four-digit number is:",
+    "opts": [
+      "(a) 90001",
+      "(b) 91000",
+      "(c) 90100",
+      "(d) 90010"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "5. Which is the correct statement for the numbers 56 and 84?",
+    "opts": [
+      "(a) Both are prime numbers",
+      "(b) Both are co-prime numbers",
+      "(c) Both are multiples of 14",
+      "(d) Both are odd numbers"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "6. The five-digit greatest number formed with 7, 2, 4, 8 and 0 (each digit used once) is:",
+    "opts": [
+      "(a) 80742",
+      "(b) 87042",
+      "(c) 87420",
+      "(d) 87402"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "7. Which statement is true for 11 and 21?",
+    "opts": [
+      "(a) Both are divisible numbers",
+      "(b) Both are even numbers",
+      "(c) Both are co-prime numbers",
+      "(d) Both are multiples of 3"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "8. The highest two-digit prime number is:",
+    "opts": [
+      "(a) 93",
+      "(b) 97",
+      "(c) 91",
+      "(d) 99"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "9. Find the greatest five-digit even number using the digits 3, 0, 5, 7 and 8.",
+    "opts": [
+      "(a) 83570",
+      "(b) 85703",
+      "(c) 87530",
+      "(d) 87350"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "10. The difference between the place values of two 7s in 27307 is:",
+    "opts": [
+      "(a) 6993",
+      "(b) 7300",
+      "(c) 307",
+      "(d) 40"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "11. Find out the unit's digit in the product of (3207 x 12 x 17 x 13).",
+    "opts": [
+      "(a) 0",
+      "(b) 3",
+      "(c) 4",
+      "(d) 7"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "12. Which of the following is the smallest four-digit number?",
+    "opts": [
+      "(a) 1000",
+      "(b) 1100",
+      "(c) 1300",
+      "(d) 1900"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "13. How many multiples of 7 lie between 14 and 77?",
+    "opts": [
+      "(a) 10",
+      "(b) 9",
+      "(c) 8",
+      "(d) 7"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "14. What value must be given to * so that the number 6912* is divisible by 25?",
+    "opts": [
+      "(a) 3",
+      "(b) 5",
+      "(c) 4",
+      "(d) 7"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "15. The value of 20.91 divided by 0.17 is:",
+    "opts": [
+      "(a) 0.0123",
+      "(b) 1.230",
+      "(c) 12.30",
+      "(d) 123.0"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "16. In a park 14 rows are there and 420 cars stand in every row. How many cars will stand in the park?",
+    "opts": [
+      "(a) 5880",
+      "(b) 434",
+      "(c) 406",
+      "(d) 30"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "17. A number is less than 50, a multiple of 7, and has 3 factors. What is the number?",
+    "opts": [
+      "(a) 14",
+      "(b) 42",
+      "(c) 49",
+      "(d) 70"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "18. What is the greatest four-digit number in which all digits are different?",
+    "opts": [
+      "(a) 9876",
+      "(b) 9768",
+      "(c) 9867",
+      "(d) 9786"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "19. The product of three numbers is 7980. The product of two of them is 228. What is the third number?",
+    "opts": [
+      "(a) 25",
+      "(b) 15",
+      "(c) 16",
+      "(d) 35"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "20. The sum of the greatest and the smallest 4-digit numbers is:",
+    "opts": [
+      "(a) 8999",
+      "(b) 10999",
+      "(c) 11110",
+      "(d) 11111"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "21. One-third of a property is worth Rs. 1500. Find two-fifth of the property.",
+    "opts": [
+      "(a) Rs. 600",
+      "(b) Rs. 900",
+      "(c) Rs. 1800",
+      "(d) Rs. 1000"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "22. Which of the following sets of numbers are in ascending order?",
+    "opts": [
+      "(a) 1/10, 0.25, 1/4",
+      "(b) 0.25, 1/4, 1/5",
+      "(c) 1/5, 1/4, 0.25",
+      "(d) 1/4, 1/5, 0.25"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "23. The product of two numbers is 8. If one number is 5/6, what is the other number?",
+    "opts": [
+      "(a) 2",
+      "(b) 3/5",
+      "(c) 48/5",
+      "(d) 2/3"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "24. Which of the following is the largest fraction?",
+    "opts": [
+      "(a) 5/6",
+      "(b) 9/11",
+      "(c) 7/8",
+      "(d) 10/13"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "25. Which of the following is the smallest fraction?",
+    "opts": [
+      "(a) 1/10",
+      "(b) 2/15",
+      "(c) 3/8",
+      "(d) 4/9"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "26. Four-fifth of an hour is equal to:",
+    "opts": [
+      "(a) 30 min",
+      "(b) 48 min",
+      "(c) 50 min",
+      "(d) 55 min"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "27. Find the product of 0.4 x 0.04 x 0.004.",
+    "opts": [
+      "(a) 0.00064",
+      "(b) 0.0064",
+      "(c) 64",
+      "(d) 0.000064"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "28. 2.205 divided by 0.15 is equal to:",
+    "opts": [
+      "(a) 1.47",
+      "(b) 14.7",
+      "(c) 147",
+      "(d) 0.147"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "29. In a class of 30 students, the number of girls is 1/5 of the number of boys. How many boys are there?",
+    "opts": [
+      "(a) 25",
+      "(b) 18",
+      "(c) 20",
+      "(d) 19"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "30. Which is the smallest fraction among 1/2, 3/5, 2/3 and 4/7?",
+    "opts": [
+      "(a) 1/2",
+      "(b) 3/5",
+      "(c) 2/3",
+      "(d) 4/7"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "31. Which of the following numbers is divisible by 3, 4, 5 and 6?",
+    "opts": [
+      "(a) 36",
+      "(b) 60",
+      "(c) 80",
+      "(d) 90"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "32. The sum of the first four multiples of 6 is:",
+    "opts": [
+      "(a) 66",
+      "(b) 56",
+      "(c) 72",
+      "(d) 60"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "33. The sum of the first five multiples of 6 is:",
+    "opts": [
+      "(a) 90",
+      "(b) 54",
+      "(c) 30",
+      "(d) 84"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "34. Which of the following is NOT a factor of 316?",
+    "opts": [
+      "(a) 1",
+      "(b) 8",
+      "(c) 79",
+      "(d) 158"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "35. Factors of 30 are:",
+    "opts": [
+      "(a) 2, 3, 5",
+      "(b) 1, 2, 3, 5, 110",
+      "(c) 1, 2, 3, 10, 15",
+      "(d) 1, 2, 3, 5, 6, 10, 15, 30"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "36. How many times does the digit 9 appear when writing numbers from 1 to 100?",
+    "opts": [
+      "(a) 9",
+      "(b) 100",
+      "(c) 20",
+      "(d) 21"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "37. The total number of factors of 24 is:",
+    "opts": [
+      "(a) 8",
+      "(b) 7",
+      "(c) 4",
+      "(d) 9"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "38. The number of prime factors of 105 is:",
+    "opts": [
+      "(a) 2",
+      "(b) 3",
+      "(c) 4",
+      "(d) 5"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "39. The HCF of two numbers 14 and 28 is 14. Find the LCM.",
+    "opts": [
+      "(a) 28",
+      "(b) 196",
+      "(c) 298",
+      "(d) 98"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "40. What is the smallest four-digit number completely divisible by 2, 3, 8 and 10?",
+    "opts": [
+      "(a) 1020",
+      "(b) 1060",
+      "(c) 1080",
+      "(d) 1120"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "41. If the product of two co-prime numbers is 117, their LCM will be:",
+    "opts": [
+      "(a) 9",
+      "(b) 13",
+      "(c) 39",
+      "(d) 117"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "42. Three bells ring at intervals of 12, 15 and 18 minutes. They start ringing at 9:00 am. When will they next ring simultaneously?",
+    "opts": [
+      "(a) 10:00 am",
+      "(b) 11:00 am",
+      "(c) 12:00 pm",
+      "(d) 1:00 pm"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "43. Find the HCF of 45, 75 and 165.",
+    "opts": [
+      "(a) 15",
+      "(b) 45",
+      "(c) 75",
+      "(d) 2475"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "44. Find the LCM of 12, 18 and 24.",
+    "opts": [
+      "(a) 72",
+      "(b) 48",
+      "(c) 60",
+      "(d) 84"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "45. The HCF of two co-prime numbers is:",
+    "opts": [
+      "(a) 1",
+      "(b) 0",
+      "(c) Sum of the numbers",
+      "(d) Difference of the numbers"
+    ],
+    "ans": [
+      "A"
+    ]
+  },
+  {
+    "q": "46. The LCM of 12, 24 and 30 is:",
+    "opts": [
+      "(a) 2",
+      "(b) 30",
+      "(c) 60",
+      "(d) 120"
+    ],
+    "ans": [
+      "D"
+    ]
+  },
+  {
+    "q": "47. A bus left Delhi for Dehradun at 10:15 am. The journey took 6 h 30 min. At what time did the bus reach Dehradun?",
+    "opts": [
+      "(a) 4:15 pm",
+      "(b) 4:30 pm",
+      "(c) 4:45 pm",
+      "(d) 5:00 pm"
+    ],
+    "ans": [
+      "C"
+    ]
+  },
+  {
+    "q": "48. The product of two decimals is 14.837. If one decimal is 4.01, what is the other decimal?",
+    "opts": [
+      "(a) 37",
+      "(b) 3.7",
+      "(c) 3.07",
+      "(d) 3.007"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "49. In decimal form, 80% can be expressed as:",
+    "opts": [
+      "(a) 8/5",
+      "(b) 8/10",
+      "(c) 100/8",
+      "(d) 10/8"
+    ],
+    "ans": [
+      "B"
+    ]
+  },
+  {
+    "q": "50. The fraction equivalent to 1.25 is:",
+    "opts": [
+      "(a) 1 and 1/4",
+      "(b) 2 and 1/2",
+      "(c) 1 and 1/8",
+      "(d) 1 and 3/4"
+    ],
+    "ans": [
+      "A"
+    ]
+  }
+]
