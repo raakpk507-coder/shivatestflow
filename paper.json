@@ -1,0 +1,14 @@
+{
+  "name": "ShivaFlow",
+  "papers": [
+    {
+      "id": "paper_a",
+      "name": "Practice Paper 1",
+      "file": "papera.json",
+      "type": "mcq",
+      "questions": 50,
+      "time": 60,
+      "difficulty": "Medium"
+    }
+  ]
+}
