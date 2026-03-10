@@ -731,34 +731,32 @@ body::before{
       <button class="popup-close" onclick="closePopup('popSettings')">✕</button>
     </div>
     <div class="popup-body">
-      <div class="sec-lbl">☁️ GitHub Sync (Progress Backup)</div>
+      <div class="sec-lbl">☁️ GitHub Data Storage</div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">Apna GitHub Token daalo — sab data automatically GitHub pe save hoga. Phone change karo, data safe rahega!</div>
       <div id="ghSyncArea">
         <div id="ghDisconnected">
           <div class="fg">
-            <label>GitHub Personal Access Token</label>
-            <input class="inp" id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx">
-          </div>
-          <div class="fg">
             <label>GitHub Username</label>
-            <input class="inp" id="ghUser" placeholder="your-username">
+            <input class="inp" id="ghUser" placeholder="raakpk507-coder">
           </div>
           <div class="fg">
-            <label>Repository Name</label>
-            <input class="inp" id="ghRepo" placeholder="my-sciflow-data">
+            <label>GitHub Token (ghp_...)</label>
+            <input class="inp" id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx">
+            <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;">github.com → Settings → Developer Settings → Personal Access Tokens → Tokens (classic) → repo ✅</div>
           </div>
-          <button class="btn btn-primary" onclick="connectGitHub()">🔗 Connect & Sync</button>
+          <button class="btn btn-primary" onclick="connectGitHub()">🔗 Connect — Data Auto-Save Shuru</button>
         </div>
         <div id="ghConnected" style="display:none;">
           <div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:0.82rem;color:var(--green);font-weight:700;">
-            ✅ Connected: <span id="ghConnectedInfo"></span>
+            ✅ Connected: <span id="ghConnectedInfo"></span><br>
+            <span style="font-size:0.72rem;font-weight:400;color:var(--muted);">Har test ke baad data auto-save hota hai GitHub pe</span>
           </div>
-          <div class="btn-row">
-            <button class="btn" onclick="pushToGitHub()" style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;font-weight:800;">⬆️ Save</button>
-            <button class="btn" onclick="pullFromGitHub()" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);color:#a5b4fc;font-weight:800;">⬇️ Load</button>
-          </div>
-          <button class="btn btn-ghost" onclick="disconnectGitHub()" style="margin-top:8px;font-size:0.78rem;color:var(--red);">Disconnect</button>
+          <button class="btn btn-primary" onclick="copyMyLink()" style="margin-bottom:8px;">🔗 Mera Personal Link Copy Karo</button>
+          <div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;">Yeh link bookmark karo — kabhi bhi token disconnect nahi hoga!</div>
+          <button class="btn btn-ghost" onclick="disconnectGitHub()" style="font-size:0.78rem;color:var(--red);">Disconnect</button>
         </div>
       </div>
+
       <div class="sec-lbl" style="margin-top:16px;">⚠️ Danger Zone</div>
       <button class="btn" onclick="closePopup('popSettings');openPopup('popClearConfirm');" style="background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.25);color:var(--red);">🗑️ Clear All Data</button>
     </div>
@@ -857,8 +855,12 @@ async function loadLocalData(){
   } catch(e){ console.warn('DB load failed', e); }
 }
 async function saveLocalData(){
-  try{ await dbSet('userData', userData); }
-  catch(e){ console.warn('DB save failed', e); }
+  // Save locally as fallback
+  try{ await dbSet('userData', userData); } catch(e){}
+  // Auto push to GitHub if token set
+  if(userData.settings && userData.settings.ghToken){
+    await pushToGitHub(true);
+  }
 }
 async function clearAllData(){
   userData = { srsData:{}, history:[], streak:{ lastDate:null, count:0 }, settings:{} };
@@ -1920,21 +1922,36 @@ function updateStreak(){
 async function connectGitHub(){
   const token = document.getElementById('ghToken').value.trim();
   const user  = document.getElementById('ghUser').value.trim();
-  const repo  = document.getElementById('ghRepo').value.trim();
-  if(!token||!user||!repo){ toast('Fill all GitHub fields','error'); return; }
+  if(!token||!user){ toast('Username aur Token bharo','error'); return; }
   userData.settings.ghToken = token;
   userData.settings.ghUser  = user;
-  userData.settings.ghRepo  = repo;
-  await saveLocalData();
+  userData.settings.ghRepo  = 'shivatestflow'; // Fixed repo
+  // Save settings to localStorage (not IndexedDB) so token persists
+  localStorage.setItem('sf_settings', JSON.stringify(userData.settings));
+  try{ await dbSet('userData', userData); } catch(e){}
   updateSyncUI(true);
-  toast('Connected! Syncing...','success');
-  await pullFromGitHub(true);
+  toast('Connected! Data load ho raha hai...','success');
+  await pullFromGitHub(false);
 }
+
+function copyMyLink(){
+  const s = userData.settings;
+  if(!s.ghToken){ toast('Pehle connect karo','error'); return; }
+  const base = window.location.origin + window.location.pathname;
+  const link = `${base}?t=${encodeURIComponent(s.ghToken)}&u=${encodeURIComponent(s.ghUser)}`;
+  navigator.clipboard.writeText(link).then(()=>{
+    toast('Link copy ho gaya! Ise bookmark karo 🔖','success');
+  }).catch(()=>{
+    prompt('Yeh link copy karo aur bookmark karo:', link);
+  });
+}
+
 function disconnectGitHub(){
   userData.settings.ghToken = '';
   userData.settings.ghUser  = '';
   userData.settings.ghRepo  = '';
-  saveLocalData();
+  localStorage.removeItem('sf_settings');
+  try{ dbSet('userData', userData); } catch(e){}
   updateSyncUI(false);
   toast('Disconnected','success');
 }
@@ -1943,10 +1960,10 @@ function updateSyncUI(connected){
   if(connected && s.ghToken){
     document.getElementById('ghDisconnected').style.display='none';
     document.getElementById('ghConnected').style.display='block';
-    document.getElementById('ghConnectedInfo').textContent = `${s.ghUser}/${s.ghRepo}`;
+    document.getElementById('ghConnectedInfo').textContent = `${s.ghUser} ✓`;
     // Update topbar
     document.getElementById('topbarRight').innerHTML = `
-      <button onclick="pushToGitHub()" style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7;border-radius:8px;padding:5px 10px;font-size:0.68rem;font-weight:700;cursor:pointer;margin-right:4px;">⬆️</button>
+      <span style="font-size:0.68rem;color:var(--green);margin-right:6px;">☁️</span>
       <button onclick="openPopup('popSettings')" style="background:var(--s3);border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:5px 10px;font-size:0.68rem;font-weight:700;cursor:pointer;">⚙️</button>`;
   } else {
     document.getElementById('ghDisconnected').style.display='block';
@@ -1955,7 +1972,7 @@ function updateSyncUI(connected){
       <button onclick="openPopup('popSettings')" style="background:var(--s3);border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:5px 10px;font-size:0.68rem;font-weight:700;cursor:pointer;">⚙️</button>`;
   }
 }
-async function pushToGitHub(){
+async function pushToGitHub(silent=false){
   const s = userData.settings;
   if(!s.ghToken){ toast('Not connected to GitHub','error'); return; }
   try{
@@ -1974,8 +1991,8 @@ async function pushToGitHub(){
       body: JSON.stringify(body),
     });
     if(!resp.ok) throw new Error('HTTP '+resp.status);
-    toast('Saved to GitHub ✅','success');
-  } catch(e){ toast('Save failed: '+e.message,'error'); }
+    if(!silent) toast('Saved to GitHub ✅','success');
+  } catch(e){ if(!silent) toast('Save failed: '+e.message,'error'); }
 }
 async function pullFromGitHub(silent=false){
   const s = userData.settings;
@@ -2020,24 +2037,96 @@ function toast(msg, type='success'){
   _toastTimer = setTimeout(()=>el.style.display='none', 2500);
 }
 
+
+/* ----------------------------------------------------------------
+   EXPORT / IMPORT BACKUP
+   ---------------------------------------------------------------- */
+function exportData(){
+  const data = {
+    version: 1,
+    exportDate: new Date().toISOString(),
+    srsData:  userData.srsData,
+    history:  userData.history,
+    streak:   userData.streak,
+    settings: { ghUser: userData.settings.ghUser, ghRepo: userData.settings.ghRepo }
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'shivaflow-backup-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Backup download ho raha hai! ✅','success');
+}
+
+function importData(input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e=>{
+    try{
+      const data = JSON.parse(e.target.result);
+      if(!data.version) throw new Error('Invalid backup file');
+      if(data.srsData) userData.srsData  = data.srsData;
+      if(data.history) userData.history  = data.history;
+      if(data.streak)  userData.streak   = data.streak;
+      await saveLocalData();
+      toast('Data restore ho gaya! ✅','success');
+      closePopup('popSettings');
+      renderHome();
+      renderHistory();
+      renderSrsPage();
+    } catch(err){
+      toast('Invalid backup file ❌','error');
+    }
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
 /* ----------------------------------------------------------------
    INIT
    ---------------------------------------------------------------- */
 async function init(){
   await loadLocalData();
-  // Settings button in topbar
+  // 1. Check URL params for token (highest priority)
+  try{
+    const params = new URLSearchParams(window.location.search);
+    const urlToken = params.get('t');
+    const urlUser  = params.get('u');
+    if(urlToken){
+      userData.settings.ghToken = urlToken;
+      userData.settings.ghRepo  = 'shivatestflow';
+      if(urlUser) userData.settings.ghUser = urlUser;
+      localStorage.setItem('sf_settings', JSON.stringify(userData.settings));
+      // Clean URL without reloading
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  } catch(e){}
+  // 2. Load settings from localStorage (persists even if IndexedDB clears)
+  try{
+    const saved = localStorage.getItem('sf_settings');
+    if(saved){
+      const s = JSON.parse(saved);
+      userData.settings = { ...userData.settings, ...s };
+    }
+  } catch(e){}
+  // Settings UI
   updateSyncUI(!!(userData.settings && userData.settings.ghToken));
-  // Prefill GitHub fields if saved
+  // Prefill GitHub fields
   if(userData.settings){
     if(userData.settings.ghToken) document.getElementById('ghToken').value = userData.settings.ghToken;
     if(userData.settings.ghUser)  document.getElementById('ghUser').value  = userData.settings.ghUser;
-    if(userData.settings.ghRepo)  document.getElementById('ghRepo').value  = userData.settings.ghRepo;
   }
   renderHome();
   renderPapers();
   fetchRepo();
-  // Auto-pull if connected
-  if(userData.settings && userData.settings.ghToken) pullFromGitHub(true);
+  // Auto-pull from GitHub on every app open
+  if(userData.settings && userData.settings.ghToken){
+    await pullFromGitHub(true);
+    renderHome(); renderHistory(); renderSrsPage();
+  }
 }
 init();
 
