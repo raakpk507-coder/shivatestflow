@@ -2043,31 +2043,3 @@ init();
 </script>
 </body>
 </html>
-<script>
-// PWA Service Worker Registration
-if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
-    // Inline service worker as blob
-    const swCode = `
-      const CACHE = 'shivaflow-v1';
-      self.addEventListener('install', e=>{
-        e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./', './index.html'])));
-        self.skipWaiting();
-      });
-      self.addEventListener('activate', e=>{
-        e.waitUntil(clients.claim());
-      });
-      self.addEventListener('fetch', e=>{
-        e.respondWith(
-          fetch(e.request).catch(()=>caches.match(e.request))
-        );
-      });
-    `;
-    const blob = new Blob([swCode], {type:'application/javascript'});
-    const swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).then(()=>{
-      console.log('SW registered');
-    }).catch(e=>console.log('SW error:', e));
-  });
-}
-</script>
