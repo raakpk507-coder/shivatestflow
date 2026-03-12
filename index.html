@@ -1617,8 +1617,13 @@ function renderReviewItems(){
     const qText = item.q.q || `Q${i+1}`;
     const note    = item.note || '';
     const flagged = item.flagged || false;
+    const t = item.time;
+    const timeStr = t ? (t>=60 ? `${Math.floor(t/60)}m ${t%60}s` : `${t}s`) : null;
     return `<div class="review-item ${cls}">
-      <div class="rv-st" style="color:${item.isSkip?'var(--gold)':item.isCorrect?'var(--green)':'var(--red)'};">${icon} ${item.isSkip?'SKIPPED':item.isCorrect?'CORRECT':'WRONG'}${flagged?' 🔖':''}</div>
+      <div class="rv-st" style="display:flex;justify-content:space-between;align-items:center;color:${item.isSkip?'var(--gold)':item.isCorrect?'var(--green)':'var(--red)'};">
+        <span>${icon} ${item.isSkip?'SKIPPED':item.isCorrect?'CORRECT':'WRONG'}${flagged?' 🔖':''}</span>
+        ${timeStr ? `<span style="color:var(--muted);font-size:0.68rem;font-weight:700;">⏱️ ${timeStr}</span>` : ''}
+      </div>
       <div style="font-size:0.82rem;font-weight:600;margin-bottom:8px;">${qText}</div>
       ${item.q.img?`<img src="${item.q.img}" style="max-width:100%;border-radius:8px;margin-bottom:8px;background:#fff;" onclick="openIv(this.src)">`:''}
       <div style="font-size:0.78rem;color:var(--text2);">
