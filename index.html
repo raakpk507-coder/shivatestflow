@@ -1276,19 +1276,22 @@ function renderMcqQs(){
   }).join('');
 }
 function toggleOpt(qIdx, letter){
+  // Track time on first answer to this question
+  if(qStartTime && (!answers[qIdx] || !answers[qIdx].length)){
+    const elapsed = Math.round((Date.now() - qStartTime) / 1000);
+    qTimeTaken[qIdx] = elapsed;
+    qStartTime = Date.now();
+  }
   if(!answers[qIdx]) answers[qIdx]=[];
   const arr = answers[qIdx];
   const q   = currentQs[qIdx];
   const isMulti = q.ans && q.ans.length > 1;
   if(!isMulti){
-    // Single select — toggle or replace
     answers[qIdx] = arr.includes(letter) ? [] : [letter];
   } else {
-    // Multi select — toggle
     const idx = arr.indexOf(letter);
     if(idx>=0) arr.splice(idx,1); else arr.push(letter);
   }
-  // Re-render this question's options only
   const container = document.getElementById('opts-'+qIdx);
   if(container) container.innerHTML = renderOpts(q.opts, answers[qIdx], qIdx, 'exam');
   renderQdots();
