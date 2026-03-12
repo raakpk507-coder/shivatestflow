@@ -1177,7 +1177,7 @@ async function startTest(){
     if(currentPaper.type==='pdf'){
       setupPdfExam(qs, timeMins);
     } else {
-      setupMcqExam(qs, timeMins);
+      setupMcqExam(shuffleArr([...qs]), timeMins);
     }
   } catch(e){
     btn.disabled=false; btn.textContent='🚀 Start Test';
@@ -1188,6 +1188,8 @@ async function startTest(){
 /* ----------------------------------------------------------------
    HELPERS — OPTIONS RENDERING
    ---------------------------------------------------------------- */
+function shuffleArr(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]; } return a; }
+
 function isImageOnly(opts){
   return !opts || !opts.length || opts.every(o=>o==='A'||o==='B'||o==='C'||o==='D');
 }
