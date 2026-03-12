@@ -2354,13 +2354,29 @@ async function init(){
 }
 init();
 
-// Register Service Worker
+// PWA Service Worker — network-first, auto-update on new version
 if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('./sw.js')
-      .then(()=>console.log('SW registered'))
-      .catch(e=>console.log('SW error:',e));
-  });
+  const sw = `
+    const VERSION = '${Date.now()}';
+    self.addEventListener('install', e => { self.skipWaiting(); });
+    self.addEventListener('activate', e => {
+      e.waitUntil(
+        caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))))
+      );
+      self.clients.claim();
+    });
+    self.addEventListener('fetch', e => {
+      e.respondWith(
+        fetch(e.request).then(r => {
+          const rc = r.clone();
+          caches.open('v'+VERSION).then(c => c.put(e.request, rc));
+          return r;
+        }).catch(() => caches.match(e.request))
+      );
+    });
+  `;
+  const blob = new Blob([sw],{type:'application/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
 }
 
 </script>
